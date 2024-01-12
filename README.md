@@ -9,4 +9,5 @@ Plays "boss music" (Fight Theme) from Attack on Titan when a giant starts chasin
 
 # Version history:
 1.0.1 Fix readme
+
 1.0.0 Initial release
