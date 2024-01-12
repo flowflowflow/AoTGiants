@@ -42,7 +42,6 @@ namespace AoTGiants.Patches
                 if(!aotSFX.isPlaying)
                 {
                     playRandomTitanAggroClip(aotSFX);
-                    logger.LogInfo("Played AoT audio clip!");
                 }
                 return;
             }
@@ -58,6 +57,12 @@ namespace AoTGiants.Patches
                 {
                     GameNetworkManager.Instance.localPlayerController.JumpToFearLevel(0.4f);
                 }
+            }
+
+            //untested (xD)
+            if(__lostPlayerInChase == true)
+            {
+                aotSFX.Stop();
             }
         }
 
