@@ -21,6 +21,7 @@ namespace AoTGiants.Patches
         private static void forestGiantAoTAudioPatch(ForestGiantAI __instance)
         {
             aotSFX = GameNetworkManager.Instance.localPlayerController.itemAudio;
+            aotSFX.volume = 0.5f;
 
             bool __lostPlayerInChase = false;
             if (__lostPlayerInChase == false)
