@@ -21,13 +21,12 @@ namespace AoTGiants.Patches
         private static void forestGiantAoTAudioPatch(ForestGiantAI __instance)
         {
             aotSFX = GameNetworkManager.Instance.localPlayerController.itemAudio;
-            aotSFX.volume = 0.5f;
+            aotSFX.volume = 0.2f;
 
             bool __lostPlayerInChase = false;
             if (__lostPlayerInChase == false)
             {
                 __lostPlayerInChase = (bool)Traverse.Create(__instance).Field("lostPlayerInChase").GetValue();
-                logger.LogInfo("Boolean __lostPlayerInChase = " + __lostPlayerInChase);
             }
             
             if (GameNetworkManager.Instance.localPlayerController.isPlayerDead || GameNetworkManager.Instance.localPlayerController.isInsideFactory)
@@ -59,10 +58,11 @@ namespace AoTGiants.Patches
                 }
             }
 
-            //untested (xD)
+            //if player is lost the sfx stops
             if(__lostPlayerInChase == true)
             {
                 aotSFX.Stop();
+                logger.LogInfo("Stopped audio clip");
             }
         }
 
