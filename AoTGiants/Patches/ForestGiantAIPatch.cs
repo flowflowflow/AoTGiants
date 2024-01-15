@@ -16,13 +16,14 @@ namespace AoTGiants.Patches
     {
         private static ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("Flowprojects.AoTGiants");
         private static AudioSource aotSFX;
+        private static string sfxVolume = AotGiantsBase.configVolume.Value;
 
         [HarmonyPatch("GiantSeePlayerEffect")]
         [HarmonyPrefix]
         private static void forestGiantAoTAudioPatch(ForestGiantAI __instance)
         {
             aotSFX = GameNetworkManager.Instance.localPlayerController.itemAudio;
-            aotSFX.volume = 0.25f;
+            aotSFX.volume = AotGiantsBase.getVolume(sfxVolume);
 
             bool __lostPlayerInChase = false;
             if (__lostPlayerInChase == false)

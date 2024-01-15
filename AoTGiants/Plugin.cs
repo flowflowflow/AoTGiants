@@ -1,6 +1,7 @@
 ﻿using AoTGiants.Patches;
 using BepInEx;
 using BepInEx.Configuration;
+using BepInEx.Logging;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,9 @@ namespace AoTGiants
         private const string pluginVersion = "1.0.0";
 
         private const string assetBundleName = "aotgiantsassets";
-        private const float DefaultSFXVolume = 0.3f;
+        internal const float DefaultSFXVolume = 0.3f;
 
-        private ConfigEntry<string> configVolume;
+        internal static ConfigEntry<string> configVolume;
 
         private readonly Harmony harmony = new Harmony(pluginGUID);
 
@@ -63,15 +64,13 @@ namespace AoTGiants
         }
 
         //Not tested xd
-        private float setVolume(string volume)
+        internal static float getVolume(string volume)
         {
             try
             {
                 return (Int32.Parse(volume) / 100);
             } catch (Exception ex)
             {
-                Logger.LogError("Failed to read Volume from config! Using default value (" + ((int)DefaultSFXVolume*100) + "%)");
-                Logger.LogError(ex.Message);
                 return DefaultSFXVolume;
             }
         }
