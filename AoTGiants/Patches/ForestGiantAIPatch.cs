@@ -14,7 +14,7 @@ namespace AoTGiants.Patches
     [HarmonyPatch(typeof(ForestGiantAI))]
     internal class ForestGiantAIPatch
     {
-        private static ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("Flowprojects.AoTGiants");
+        private static ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource("Flowprojects.AoTGiants.ForestGiantAIPatch");
         private static AudioSource aotSFX;
         private static string sfxVolume = AotGiantsBase.configVolume.Value;
 
@@ -74,7 +74,7 @@ namespace AoTGiants.Patches
             AudioSource audioSource = __audioSource;
             int audioClipIndex = UnityEngine.Random.Range(0, AotGiantsBase.SoundFX.Count);
             audioSource.PlayOneShot(AotGiantsBase.SoundFX[audioClipIndex]);
-            logger.LogInfo("Played audio clip " + audioClipIndex);
+            logger.LogInfo("Played audio clip " + audioClipIndex + " with volume " + aotSFX.volume);
         }
 
         //Original method code (v47 / v49)

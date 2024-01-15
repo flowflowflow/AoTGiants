@@ -6,6 +6,7 @@ using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace AoTGiants
     {
         private const string pluginGUID = "Flowprojects.AoTGiants";
         private const string pluginName = "AoT Giants";
-        private const string pluginVersion = "1.0.0";
+        private const string pluginVersion = "1.1.0";
 
         private const string assetBundleName = "aotgiantsassets";
         internal const float DefaultSFXVolume = 0.3f;
@@ -67,9 +68,9 @@ namespace AoTGiants
         internal static float getVolume(string volume)
         {
             try
-            {
-                return (Int32.Parse(volume) / 100);
-            } catch (Exception ex)
+            {    
+                return ((float)Convert.ToDouble(volume) / 100);
+            } catch (Exception)
             {
                 return DefaultSFXVolume;
             }
