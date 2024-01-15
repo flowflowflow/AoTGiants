@@ -64,7 +64,6 @@ namespace AoTGiants
             harmony.PatchAll(typeof(ForestGiantAIPatch));
         }
 
-        //Not tested xd
         internal static float getVolume(string volume)
         {
             try
