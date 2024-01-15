@@ -1,4 +1,5 @@
-﻿using BepInEx.Logging;
+﻿using BepInEx.Configuration;
+using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
 using System;
@@ -21,7 +22,7 @@ namespace AoTGiants.Patches
         private static void forestGiantAoTAudioPatch(ForestGiantAI __instance)
         {
             aotSFX = GameNetworkManager.Instance.localPlayerController.itemAudio;
-            aotSFX.volume = 0.2f;
+            aotSFX.volume = 0.25f;
 
             bool __lostPlayerInChase = false;
             if (__lostPlayerInChase == false)

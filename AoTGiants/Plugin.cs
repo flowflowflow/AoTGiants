@@ -1,5 +1,6 @@
 ﻿using AoTGiants.Patches;
 using BepInEx;
+using BepInEx.Configuration;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,14 @@ namespace AoTGiants
         private const string pluginGUID = "Flowprojects.AoTGiants";
         private const string pluginName = "AoT Giants";
         private const string pluginVersion = "1.0.0";
+
+        private const string assetBundleName = "aotgiantsassets";
+        private const float DefaultSFXVolume = 0.3f;
+
+        private ConfigEntry<string> configVolume;
+
         private readonly Harmony harmony = new Harmony(pluginGUID);
+
         private static AotGiantsBase Instance;
         internal static List<AudioClip> SoundFX;
         internal static AssetBundle Bundle;
@@ -27,6 +35,10 @@ namespace AoTGiants
             {
                 Instance = this;
             }
+
+            //Config initialization
+            configVolume = Config.Bind("General","Volume", "25", "Volume percentage of the music");
+
             // Plugin startup logic
             Logger.LogInfo($"Plugin {pluginGUID} is loaded!");
 
@@ -34,7 +46,7 @@ namespace AoTGiants
             string dllName = "AoTGiants.dll";
             string location = this.Info.Location.TrimEnd(dllName.ToCharArray());
             SoundFX = new List<AudioClip>();
-            Bundle = AssetBundle.LoadFromFile(location + "aotgiantsassets");
+            Bundle = AssetBundle.LoadFromFile(location + assetBundleName);
 
             if (Bundle != null)
             {
@@ -48,6 +60,20 @@ namespace AoTGiants
 
             //Patch method
             harmony.PatchAll(typeof(ForestGiantAIPatch));
+        }
+
+        //Not tested xd
+        private float setVolume(string volume)
+        {
+            try
+            {
+                return (Int32.Parse(volume) / 100);
+            } catch (Exception ex)
+            {
+                Logger.LogError("Failed to read Volume from config! Using default value (" + ((int)DefaultSFXVolume*100) + "%)");
+                Logger.LogError(ex.Message);
+                return DefaultSFXVolume;
+            }
         }
     }
 }
