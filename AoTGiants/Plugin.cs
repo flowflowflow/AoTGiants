@@ -38,7 +38,7 @@ namespace AoTGiants
             }
 
             //Config initialization
-            configVolume = Config.Bind("General","Volume", "25", "Volume percentage of the music");
+            configVolume = Config.Bind("General","Volume", "30", "Volume of the music (in percent)");
 
             // Plugin startup logic
             Logger.LogInfo($"Plugin {pluginGUID} is loaded!");
